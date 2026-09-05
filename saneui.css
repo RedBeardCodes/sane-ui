@@ -1,0 +1,569 @@
+/* ==========================================================================
+   Design Tokens
+   ========================================================================== */
+
+:root {
+    /* Theme
+       ---------------------------------------------------------------------- */
+
+    /*
+     * Defaults to the user's system preference.
+     *
+     * Explicit themes should be applied to <html>:
+     *   <html class="theme-light">
+     *   <html class="theme-dark">
+     */
+    color-scheme: light dark;
+
+    --ui-hue: 250;
+    --ui-chroma: 0.18;
+
+    /* Colors
+       ---------------------------------------------------------------------- */
+    --ui-primary-foreground: oklch(98% .01 var(--ui-hue));
+    --ui-secondary-foreground: oklch(98% .01 var(--ui-hue));
+
+    --ui-success-foreground: oklch(98% .01 145);
+    --ui-warning-foreground: oklch(18% .02 85);
+    --ui-danger-foreground: oklch(98% .01 25);
+    --ui-info-foreground: oklch(98% .01 230);
+
+    --ui-primary:
+        oklch(60% var(--ui-chroma) var(--ui-hue));
+
+    --ui-secondary:
+        oklch(
+            60%
+            calc(var(--ui-chroma) * 0.55)
+            var(--ui-hue)
+        );
+
+    --ui-accent:
+        oklch(
+            65%
+            calc(var(--ui-chroma) * 0.75)
+            calc(var(--ui-hue) + 40)
+        );
+
+    --ui-success: oklch(65% 0.16 145);
+    --ui-warning: oklch(75% 0.17 85);
+    --ui-danger:  oklch(60% 0.18 25);
+    --ui-info:    oklch(65% 0.14 230);
+
+    /* Surfaces
+       ---------------------------------------------------------------------- */
+
+    --ui-background:
+        light-dark(
+            oklch(98% 0.01 var(--ui-hue)),
+            oklch(15% 0.02 var(--ui-hue))
+        );
+
+    --ui-surface:
+        light-dark(
+            oklch(100% 0.005 var(--ui-hue)),
+            oklch(20% 0.02 var(--ui-hue))
+        );
+
+    --ui-surface-raised:
+        light-dark(
+            oklch(100% 0 var(--ui-hue)),
+            oklch(24% 0.02 var(--ui-hue))
+        );
+
+    --ui-foreground:
+        light-dark(
+            oklch(18% 0.02 var(--ui-hue)),
+            oklch(94% 0.01 var(--ui-hue))
+        );
+
+    --ui-muted:
+        light-dark(
+            oklch(50% 0.02 var(--ui-hue)),
+            oklch(70% 0.02 var(--ui-hue))
+        );
+
+    --ui-border:
+        light-dark(
+            oklch(85% 0.02 var(--ui-hue)),
+            oklch(32% 0.02 var(--ui-hue))
+        );
+
+    /* Shape
+       ---------------------------------------------------------------------- */
+
+    --ui-radius-small: 0.25rem;
+    --ui-radius:       0.375rem;
+    --ui-radius-large: 0.625rem;
+
+    /* Spacing
+       ---------------------------------------------------------------------- */
+
+    --ui-space: 0.25rem;
+
+    /* Typography
+       ---------------------------------------------------------------------- */
+
+    --ui-font:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    --ui-font-mono:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+    /* Motion
+       ---------------------------------------------------------------------- */
+
+    --ui-duration: 750ms;
+    --ui-easing: ease;
+
+    /* Common component values
+       ---------------------------------------------------------------------- */
+
+    --ui-control-height: 2.5rem;
+}
+
+
+/* ==========================================================================
+   Themes
+   ========================================================================== */
+
+.theme-light {
+    color-scheme: light;
+}
+
+.theme-dark {
+    color-scheme: dark;
+}
+
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    font-family: var(--ui-font);
+    line-height: 1.5;
+    color: var(--ui-foreground);
+    background: var(--ui-background);
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+    cursor: not-allowed;
+}
+
+img,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+:focus-visible {
+    outline: 2px solid var(--ui-primary);
+    outline-offset: 2px;
+}
+
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.container {
+    width: min(100% - 2rem, 72rem);
+    margin-inline: auto;
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap, 1rem);
+}
+
+.cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--cluster-gap, 0.75rem);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            var(--grid-columns, 1),
+            minmax(0, 1fr)
+        );
+    gap: var(--grid-gap, 1rem);
+}
+
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2;
+}
+
+.heading {
+    margin-block: 0;
+    font-weight: 650;
+}
+
+.muted {
+    color: var(--ui-muted);
+}
+
+.small {
+    font-size: 0.875rem;
+}
+
+.mono {
+    font-family: var(--ui-font-mono);
+}
+
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.button {
+    --button-bg: var(--ui-surface);
+    --button-fg: var(--ui-foreground);
+    --button-border: var(--ui-border);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    min-height: var(--ui-control-height);
+    padding-inline: 1rem;
+
+    color: var(--button-fg);
+    background: var(--button-bg);
+    border: 1px solid var(--button-border);
+    border-radius: var(--ui-radius);
+
+    font-weight: 550;
+    line-height: 1;
+
+    transition:
+        background-color var(--ui-duration) var(--ui-easing),
+        border-color var(--ui-duration) var(--ui-easing),
+        color var(--ui-duration) var(--ui-easing),
+        transform var(--ui-duration) var(--ui-easing);
+}
+
+.button:hover:not(:disabled) {
+    --button-bg:
+        oklch(
+            from var(--button-bg)
+            calc(l + 0.05)
+            c
+            h
+        );
+}
+
+.button:active:not(:disabled) {
+    transform: translateY(1px);
+
+    --button-bg:
+        oklch(
+            from var(--button-bg)
+            calc(l - 0.05)
+            c
+            h
+        );
+}
+
+.button:disabled {
+    opacity: 0.55;
+}
+
+.button.primary {
+    --button-bg: var(--ui-primary);
+    --button-fg: white;
+    --button-border: var(--ui-primary);
+}
+
+.button.secondary {
+    --button-bg: var(--ui-secondary);
+    --button-fg: white;
+    --button-border: var(--ui-secondary);
+}
+
+.button.danger {
+    --button-bg: var(--ui-danger);
+    --button-fg: white;
+    --button-border: var(--ui-danger);
+}
+
+/* ==========================================================================
+   Badges
+   ========================================================================== */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+
+    padding: .2em .55em;
+    border: 1px solid var(--ui-border);
+    border-radius: 999px;
+
+    background: var(--ui-surface);
+    color: var(--ui-foreground);
+
+    font-size: .8125em;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.badge.primary {
+    border-color: var(--ui-primary);
+    background: var(--ui-primary);
+    color: var(--ui-primary-foreground);
+}
+
+.badge.secondary {
+    border-color: var(--ui-secondary);
+    background: var(--ui-secondary);
+    color: var(--ui-secondary-foreground);
+}
+
+.badge.success {
+    border-color: var(--ui-success);
+    background: var(--ui-success);
+    color: var(--ui-success-foreground);
+}
+
+.badge.warning {
+    border-color: var(--ui-warning);
+    background: var(--ui-warning);
+    color: var(--ui-warning-foreground);
+}
+
+.badge.danger {
+    border-color: var(--ui-danger);
+    background: var(--ui-danger);
+    color: var(--ui-danger-foreground);
+}
+
+.badge.info {
+    border-color: var(--ui-info);
+    background: var(--ui-info);
+    color: var(--ui-info-foreground);
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+
+    color: var(--ui-foreground);
+    background: var(--ui-surface);
+
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius);
+
+    outline: none;
+
+    transition:
+        border-color var(--ui-duration) var(--ui-easing),
+        box-shadow var(--ui-duration) var(--ui-easing);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    border-color: var(--ui-primary);
+
+    box-shadow:
+        0 0 0 3px
+        color-mix(
+            in oklch,
+            var(--ui-primary) 20%,
+            transparent
+        );
+}
+
+.input:disabled,
+.select:disabled,
+.textarea:disabled {
+    opacity: 0.6;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.card {
+    padding: 1.25rem;
+
+    color: var(--ui-foreground);
+    background: var(--ui-surface);
+
+    border: 1px solid var(--ui-border);
+    border-radius: var(--ui-radius-large);
+}
+
+
+/* ==========================================================================
+   Alerts
+   ========================================================================== */
+
+.alert {
+    --alert-color: var(--ui-info);
+
+    padding: 1rem;
+
+    color: var(--alert-color);
+
+    background:
+        color-mix(
+            in oklch,
+            var(--alert-color) 10%,
+            var(--ui-background)
+        );
+
+    border: 1px solid
+        color-mix(
+            in oklch,
+            var(--alert-color) 35%,
+            var(--ui-border)
+        );
+
+    border-radius: var(--ui-radius);
+}
+
+.alert.success {
+    --alert-color: var(--ui-success);
+}
+
+.alert.warning {
+    --alert-color: var(--ui-warning);
+}
+
+.alert.danger {
+    --alert-color: var(--ui-danger);
+}
+
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+.fade-in {
+    animation:
+        fade-in
+        var(--ui-duration)
+        var(--ui-easing);
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-up {
+    animation:
+        slide-up
+        var(--ui-duration)
+        var(--ui-easing);
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.spin {
+    animation: spin var(--ui-duration) linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
