@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Sane UI — Component Showcase</title>
+
+    <link rel="stylesheet" href="saneui.css">
+    <link rel="stylesheet" href="my-theme.css">
+
+    <style>
+        /*
+         * Showcase-only styles.
+         *
+         * These demonstrate that application-specific CSS can
+         * override/configure Sane UI without modifying sane.css.
+         */
+
+        :root {
+            --ui-hue: 250;
+            --ui-chroma: .18;
+        }
+
+        .showcase {
+            --stack-gap: 3rem;
+        }
+
+        .showcase-section {
+            --stack-gap: 1.5rem;
+        }
+
+        .demo {
+            padding: 1.5rem;
+            border: 1px dashed var(--ui-border);
+            border-radius: var(--ui-radius);
+            background: var(--ui-background);
+        }
+
+        .demo-dark {
+            color-scheme: dark;
+            padding: 1.5rem;
+            border-radius: var(--ui-radius);
+            background: var(--ui-surface);
+        }
+
+        .demo-light {
+            color-scheme: light;
+            padding: 1.5rem;
+            border-radius: var(--ui-radius);
+            background: var(--ui-surface);
+        }
+
+        .swatch {
+            min-height: 5rem;
+            padding: 1rem;
+            border-radius: var(--ui-radius);
+            display: flex;
+            align-items: end;
+        }
+
+        .swatch-primary {
+            background: var(--ui-primary);
+            color: white;
+        }
+
+        .swatch-secondary {
+            background: var(--ui-secondary);
+            color: white;
+        }
+
+        .swatch-accent {
+            background: var(--ui-accent);
+            color: white;
+        }
+
+        .swatch-success {
+            background: var(--ui-success);
+            color: white;
+        }
+
+        .swatch-warning {
+            background: var(--ui-warning);
+            color: black;
+        }
+
+        .swatch-danger {
+            background: var(--ui-danger);
+            color: white;
+        }
+
+        .swatch-info {
+            background: var(--ui-info);
+            color: white;
+        }
+
+        .demo-animation {
+            min-height: 6rem;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--ui-border);
+            border-radius: var(--ui-radius);
+        }
+
+        .hover-demo {
+            transition:
+                transform var(--ui-duration) var(--ui-easing),
+                background-color var(--ui-duration) var(--ui-easing);
+        }
+
+        .hover-demo:hover {
+            transform: translateY(-2px);
+            background: var(--ui-surface-raised);
+        }
+
+        code {
+            font-family: var(--ui-font-mono);
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="container stack" style="--stack-gap: .5rem; padding-block: 3rem 2rem;">
+    <p class="muted small">SANE UI · REV 1</p>
+
+    <h1 class="heading">
+        A sane vocabulary for native HTML & CSS.
+    </h1>
+
+    <p>
+        This page demonstrates the complete Rev 1 vocabulary and its
+        composable variations.
+    </p>
+</header>
+
+
+<main class="container stack showcase">
+
+
+    <!-- ========================================================= -->
+    <!-- COLORS / THEME                                             -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header class="stack" style="--stack-gap: .25rem;">
+            <h2 class="heading">Colors & Theme</h2>
+            <p class="muted">
+                Semantic colors are defined as CSS custom properties.
+                Change the theme by overriding <code>:root</code>.
+            </p>
+        </header>
+
+        <div class="grid" style="--grid-columns: 4;">
+
+            <div class="swatch swatch-primary">
+                Primary
+            </div>
+
+            <div class="swatch swatch-secondary">
+                Secondary
+            </div>
+
+            <div class="swatch swatch-accent">
+                Accent
+            </div>
+
+            <div class="swatch swatch-success">
+                Success
+            </div>
+
+            <div class="swatch swatch-warning">
+                Warning
+            </div>
+
+            <div class="swatch swatch-danger">
+                Danger
+            </div>
+
+            <div class="swatch swatch-info">
+                Info
+            </div>
+
+            <div class="swatch"
+                 style="background: var(--ui-surface); color: var(--ui-foreground); border: 1px solid var(--ui-border);">
+                Surface
+            </div>
+
+        </div>
+
+        <div class="demo-light">
+            <h3 class="heading">Light mode</h3>
+            <p>
+                This entire subtree has <code>color-scheme: light</code>.
+                The semantic colors automatically adapt.
+            </p>
+
+            <div class="cluster">
+                <button class="button primary">Primary</button>
+                <button class="button secondary">Secondary</button>
+                <button class="button danger">Danger</button>
+            </div>
+        </div>
+
+        <div class="demo-dark">
+            <h3 class="heading">Dark mode</h3>
+            <p>
+                This entire subtree has <code>color-scheme: dark</code>.
+                The semantic colors automatically adapt.
+            </p>
+
+            <div class="cluster">
+                <button class="button primary">Primary</button>
+                <button class="button secondary">Secondary</button>
+                <button class="button danger">Danger</button>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- TYPOGRAPHY                                                 -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Typography</h2>
+        </header>
+
+        <div class="demo stack">
+
+            <h1>Heading 1</h1>
+            <h2>Heading 2</h2>
+            <h3>Heading 3</h3>
+            <h4>Heading 4</h4>
+
+            <p>
+                Normal paragraph text. This is what ordinary application
+                content should look like.
+            </p>
+
+            <p class="muted">
+                Muted text is useful for secondary information.
+            </p>
+
+            <p class="small">
+                Small text for supporting information.
+            </p>
+
+            <p class="mono">
+                Monospaced text: SELECT * FROM customers;
+            </p>
+
+            <p>
+                <strong>Strong text</strong>,
+                <em>emphasized text</em>,
+                <mark>highlighted text</mark>,
+                <del>deleted text</del>.
+            </p>
+
+            <blockquote>
+                CSS should be allowed to do CSS things.
+            </blockquote>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- LAYOUT                                                      -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Layout</h2>
+        </header>
+
+        <h3>Stack</h3>
+
+        <div class="demo stack"
+             style="--stack-gap: .5rem;">
+
+            <div class="card">Item one</div>
+            <div class="card">Item two</div>
+            <div class="card">Item three</div>
+
+        </div>
+
+
+        <h3>Cluster</h3>
+
+        <div class="demo cluster">
+
+            <button class="button primary">One</button>
+            <button class="button">Two</button>
+            <button class="button secondary">Three</button>
+            <button class="button danger">Four</button>
+
+        </div>
+
+
+        <h3>Grid</h3>
+
+        <div class="demo grid" style="--grid-columns: 3;">
+
+            <div class="card">Column 1</div>
+            <div class="card">Column 2</div>
+            <div class="card">Column 3</div>
+
+        </div>
+
+
+        <h3>Responsive grid</h3>
+
+        <div class="demo grid"
+             style="--grid-columns: repeat(auto-fit, minmax(12rem, 1fr));">
+
+            <div class="card">Auto</div>
+            <div class="card">Fit</div>
+            <div class="card">Minmax</div>
+            <div class="card">CSS</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- BUTTONS                                                     -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Buttons</h2>
+        </header>
+
+        <div class="demo stack">
+
+            <h3>Default</h3>
+
+            <div class="cluster">
+                <button class="button">Default</button>
+                <button class="button primary">Primary</button>
+                <button class="button secondary">Secondary</button>
+                <button class="button danger">Danger</button>
+            </div>
+
+
+            <h3>Composition</h3>
+
+            <div class="cluster">
+                <button class="button primary large">
+                    Primary Large
+                </button>
+
+                <button class="button primary outline">
+                    Primary Outline
+                </button>
+
+                <button class="button primary rounded">
+                    Rounded
+                </button>
+
+                <button class="button" disabled>
+                    Disabled
+                </button>
+            </div>
+
+
+            <h3>With content</h3>
+
+            <div class="cluster">
+
+                <button class="button primary">
+                    <span aria-hidden="true">＋</span>
+                    Add customer
+                </button>
+
+                <button class="button">
+                    Continue
+                    <span aria-hidden="true">→</span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- FORMS                                                       -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Forms</h2>
+        </header>
+
+        <form class="demo stack">
+
+            <div class="field">
+                <label for="name">Name</label>
+                <input
+                    class="input"
+                    id="name"
+                    name="name"
+                    placeholder="Jane Doe">
+            </div>
+
+
+            <div class="field">
+                <label for="email">Email</label>
+                <input
+                    class="input"
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="jane@example.com">
+            </div>
+
+
+            <div class="field">
+                <label for="type">Account type</label>
+
+                <select class="select" id="type">
+                    <option>Personal</option>
+                    <option>Business</option>
+                    <option>Enterprise</option>
+                </select>
+            </div>
+
+
+            <div class="field">
+                <label for="message">Message</label>
+
+                <textarea
+                    class="textarea"
+                    id="message"
+                    rows="5"
+                    placeholder="Tell us what's going on..."></textarea>
+            </div>
+
+
+            <div class="field">
+                <label>
+                    <input type="checkbox">
+                    I agree to the terms.
+                </label>
+
+                <label>
+                    <input type="radio" name="demo-radio" checked>
+                    Option A
+                </label>
+
+                <label>
+                    <input type="radio" name="demo-radio">
+                    Option B
+                </label>
+            </div>
+
+
+            <div class="cluster">
+                <button class="button primary" type="submit">
+                    Submit
+                </button>
+
+                <button class="button" type="reset">
+                    Reset
+                </button>
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- CARDS                                                       -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Cards</h2>
+        </header>
+
+        <div class="grid" style="--grid-columns: 3;">
+
+            <article class="card stack">
+
+                <h3 class="heading">Basic card</h3>
+
+                <p class="muted">
+                    A simple surface for grouping related content.
+                </p>
+
+            </article>
+
+
+            <article class="card stack hover-demo">
+
+                <h3 class="heading">Interactive card</h3>
+
+                <p>
+                    Application CSS can compose with Sane UI.
+                </p>
+
+                <button class="button primary">
+                    Action
+                </button>
+
+            </article>
+
+
+            <article class="card stack">
+
+                <span class="badge success">Active</span>
+
+                <h3 class="heading">
+                    Customer
+                </h3>
+
+                <p class="muted">
+                    jane@example.com
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- ALERTS                                                      -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Alerts</h2>
+        </header>
+
+        <div class="alert info">
+            <strong>Information:</strong>
+            Your account is up to date.
+        </div>
+
+        <div class="alert success">
+            <strong>Success:</strong>
+            The document was uploaded successfully.
+        </div>
+
+        <div class="alert warning">
+            <strong>Warning:</strong>
+            Your subscription expires soon.
+        </div>
+
+        <div class="alert danger">
+            <strong>Error:</strong>
+            Something went horribly wrong.
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- BADGES                                                      -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Badges</h2>
+        </header>
+
+        <div class="demo cluster">
+
+            <span class="badge">Default</span>
+            <span class="badge primary">Primary</span>
+            <span class="badge secondary">Secondary</span>
+            <span class="badge success">Success</span>
+            <span class="badge warning">Warning</span>
+            <span class="badge danger">Danger</span>
+            <span class="badge info">Info</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- TABLE                                                       -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Tables</h2>
+        </header>
+
+        <div class="table-container">
+
+            <table class="table">
+
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Plan</th>
+                    <th>Last active</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr>
+                    <td>Jane Doe</td>
+                    <td>
+                        <span class="badge success">Active</span>
+                    </td>
+                    <td>Professional</td>
+                    <td>Today</td>
+                </tr>
+
+                <tr>
+                    <td>John Smith</td>
+                    <td>
+                        <span class="badge warning">Pending</span>
+                    </td>
+                    <td>Basic</td>
+                    <td>Yesterday</td>
+                </tr>
+
+                <tr>
+                    <td>Acme Corp.</td>
+                    <td>
+                        <span class="badge danger">Suspended</span>
+                    </td>
+                    <td>Enterprise</td>
+                    <td>Aug 31</td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- NATIVE HTML                                                 -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Native HTML</h2>
+            <p class="muted">
+                The library should enhance native HTML rather than replace it.
+            </p>
+        </header>
+
+
+        <details class="card">
+
+            <summary>
+                Details / disclosure
+            </summary>
+
+            <p>
+                No JavaScript required.
+            </p>
+
+        </details>
+
+
+        <div class="cluster">
+
+            <button
+                class="button primary"
+                popovertarget="demo-popover">
+                Open popover
+            </button>
+
+            <div
+                id="demo-popover"
+                popover
+                class="card">
+
+                <strong>Native popover</strong>
+
+                <p class="muted">
+                    The browser is doing the work.
+                </p>
+
+            </div>
+
+
+            <button
+                class="button secondary"
+                onclick="document.getElementById('demo-dialog').showModal()">
+                Open dialog
+            </button>
+
+        </div>
+
+
+        <dialog id="demo-dialog" class="card">
+
+            <form method="dialog" class="stack">
+
+                <h2 class="heading">
+                    Native dialog
+                </h2>
+
+                <p>
+                    No component framework required.
+                </p>
+
+                <button class="button primary">
+                    Close
+                </button>
+
+            </form>
+
+        </dialog>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- ANIMATIONS                                                  -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Animations</h2>
+            <p class="muted">
+                Animation behavior is expressed with classes.
+            </p>
+        </header>
+
+
+        <div class="grid" style="--grid-columns: 3;">
+
+            <div class="demo-animation fade-in">
+                fade-in
+            </div>
+
+            <div class="demo-animation slide-up">
+                slide-up
+            </div>
+
+            <div class="demo-animation">
+                <span class="spin">⟳</span>
+            </div>
+
+        </div>
+
+
+        <div class="cluster">
+
+            <button
+                class="button primary"
+                onclick="this.nextElementSibling.classList.remove('fade-in'); void this.nextElementSibling.offsetWidth; this.nextElementSibling.classList.add('fade-in');">
+                Replay
+            </button>
+
+            <div class="demo-animation fade-in">
+                Animation target
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- COMPOSITION                                                -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Composition</h2>
+
+            <p class="muted">
+                The important bit: these are independent concepts
+                that can be combined.
+            </p>
+        </header>
+
+
+        <div class="grid" style="--grid-columns: 2;">
+
+            <article class="card stack">
+
+                <div class="cluster">
+                    <span class="badge success">Active</span>
+                    <span class="badge">Customer</span>
+                </div>
+
+                <h3 class="heading">
+                    Acme Corporation
+                </h3>
+
+                <p class="muted">
+                    Enterprise customer since 2024.
+                </p>
+
+                <div class="cluster">
+
+                    <button class="button primary">
+                        View
+                    </button>
+
+                    <button class="button">
+                        Edit
+                    </button>
+
+                    <button class="button danger">
+                        Delete
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <article class="card stack">
+
+                <div class="alert warning">
+
+                    <strong>Action required</strong>
+
+                    <p>
+                        Three documents are still outstanding.
+                    </p>
+
+                </div>
+
+                <div class="cluster">
+
+                    <button class="button primary large">
+                        Request documents
+                    </button>
+
+                    <button class="button outline">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- CONFIGURATION                                              -->
+    <!-- ========================================================= -->
+
+    <section class="stack showcase-section">
+
+        <header>
+            <h2 class="heading">Configuration</h2>
+
+            <p class="muted">
+                No framework configuration object. Just CSS custom properties.
+            </p>
+        </header>
+
+
+        <div class="demo stack my-theme">
+
+            <h3 class="heading">
+                Local theme override
+            </h3>
+
+            <div
+                class="card">
+
+                <p>
+                    This card demonstrates that variables can be
+                    overridden at any scope.
+                </p>
+
+                <div class="cluster">
+
+                    <button class="button primary">
+                        Primary
+                    </button>
+
+                    <button class="button secondary">
+                        Secondary
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <h3 class="heading">
+                Layout configuration
+            </h3>
+
+            <div
+                class="grid"
+                style="
+                    --grid-columns: 4;
+                    --grid-gap: .5rem;
+                ">
+
+                <div class="card">1</div>
+                <div class="card">2</div>
+                <div class="card">3</div>
+                <div class="card">4</div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer class="container"
+        style="padding-block: 4rem;">
+
+    <p class="muted small">
+        Sane UI — native HTML, modern CSS, minimal machinery.
+    </p>
+
+</footer>
+
+</body>
+</html>
