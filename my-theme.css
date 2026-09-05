@@ -1,0 +1,4 @@
+.my-theme {
+    --ui-primary: oklch(62% .19 145);
+    --ui-secondary: oklch(62% .10 145);
+}
