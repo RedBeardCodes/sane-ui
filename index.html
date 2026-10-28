@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="theme-light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,6 +116,10 @@
         code {
             font-family: var(--ui-font-mono);
         }
+
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -139,8 +143,19 @@
 
 
     <!-- ========================================================= -->
-    <!-- COLORS / THEME                                             -->
+    <!-- COLORS / THEME                                            -->
     <!-- ========================================================= -->
+
+    <form id="theme-picker">
+                <label>
+                    <input type="radio" name="theme-radio" value="theme-light" id="light-radio" checked>
+                    Light Theme
+                </label>
+                <label>
+                    <input type="radio" name="theme-radio" value="theme-dark" id="dark-radio">
+                    Dark Theme
+                </label>
+    </form>
 
     <section class="stack showcase-section">
 
@@ -189,7 +204,7 @@
 
         </div>
 
-        <div class="demo-light">
+        <div class="demo-light" id="light-mode">
             <h3 class="heading">Light mode</h3>
             <p>
                 This entire subtree has <code>color-scheme: light</code>.
@@ -203,7 +218,7 @@
             </div>
         </div>
 
-        <div class="demo-dark">
+        <div class="demo-dark hidden" id="dark-mode">
             <h3 class="heading">Dark mode</h3>
             <p>
                 This entire subtree has <code>color-scheme: dark</code>.
@@ -221,7 +236,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- TYPOGRAPHY                                                 -->
+    <!-- TYPOGRAPHY                                                -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -271,7 +286,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- LAYOUT                                                      -->
+    <!-- LAYOUT                                                    -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -331,7 +346,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- BUTTONS                                                     -->
+    <!-- BUTTONS                                                   -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -395,7 +410,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- FORMS                                                       -->
+    <!-- FORMS                                                     -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -483,7 +498,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- CARDS                                                       -->
+    <!-- CARDS                                                     -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -540,7 +555,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- ALERTS                                                      -->
+    <!-- ALERTS                                                    -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -573,7 +588,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- BADGES                                                      -->
+    <!-- BADGES                                                    -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -598,7 +613,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- TABLE                                                       -->
+    <!-- TABLE                                                     -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -659,7 +674,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- NATIVE HTML                                                 -->
+    <!-- NATIVE HTML                                               -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -740,7 +755,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- ANIMATIONS                                                  -->
+    <!-- ANIMATIONS                                                -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -788,7 +803,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- COMPOSITION                                                -->
+    <!-- COMPOSITION                                               -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -871,7 +886,7 @@
 
 
     <!-- ========================================================= -->
-    <!-- CONFIGURATION                                              -->
+    <!-- CONFIGURATION                                             -->
     <!-- ========================================================= -->
 
     <section class="stack showcase-section">
@@ -946,6 +961,29 @@
     <p class="muted small">
         Sane UI — native HTML, modern CSS, minimal machinery.
     </p>
+
+<script>
+    const theme = document.getElementById("theme-picker")
+    const root = document.documentElement
+    const light = document.getElementById("light-mode")
+    const dark = document.getElementById("dark-mode")
+
+    theme.addEventListener("change", (event) => {
+        const selectedTheme = event.target.value
+        console.log(selectedTheme)
+        if (selectedTheme === "theme-light") {
+            root.classList.add("theme-light")
+            root.classList.remove("theme-dark")
+            light.classList.remove("hidden")
+            dark.classList.add("hidden")
+        } else {
+            root.classList.add("theme-dark")
+            root.classList.remove("theme-light")
+            dark.classList.remove("hidden")
+            light.classList.add("hidden")
+        }
+    })
+</script>
 
 </footer>
 
